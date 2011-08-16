@@ -1,6 +1,6 @@
 /**
  * Creates a new command. Base class for all commands
- * 
+ *
  * @constructor
  * @borrows EventEmitter
  */
@@ -9,7 +9,7 @@ mindmaps.Command = function() {
 	this.shortcut = null;
 	/**
 	 * The handler function.
-	 * 
+	 *
 	 * @private
 	 * @function
 	 */
@@ -52,7 +52,7 @@ mindmaps.Command.prototype = {
 
 	/**
 	 * Registers a new handler.
-	 * 
+	 *
 	 * @param {Function} handler
 	 */
 	setHandler : function(handler) {
@@ -71,7 +71,7 @@ mindmaps.Command.prototype = {
 
 	/**
 	 * Sets the enabled state of the command.
-	 * 
+	 *
 	 * @param {Boolean} enabled
 	 */
 	setEnabled : function(enabled) {
@@ -90,7 +90,7 @@ EventEmitter.mixin(mindmaps.Command);
 
 /**
  * Creates a new CreateNodeCommand.
- * 
+ *
  * @constructor
  * @augments mindmaps.Command
  */
@@ -105,7 +105,7 @@ mindmaps.CreateNodeCommand.prototype = new mindmaps.Command();
 
 /**
  * Creates a new CreateSiblingNodeCommand.
- * 
+ *
  * @constructor
  * @augments mindmaps.Command
  */
@@ -120,7 +120,7 @@ mindmaps.CreateSiblingNodeCommand.prototype = new mindmaps.Command();
 
 /**
  * Creates a new DeleteNodeCommand.
- * 
+ *
  * @constructor
  * @augments mindmaps.Command
  */
@@ -135,7 +135,7 @@ mindmaps.DeleteNodeCommand.prototype = new mindmaps.Command();
 
 /**
  * Creates a new EditNodeCaptionCommand.
- * 
+ *
  * @constructor
  * @augments mindmaps.Command
  */
@@ -149,7 +149,7 @@ mindmaps.EditNodeCaptionCommand.prototype = new mindmaps.Command();
 
 /**
  * Creates a new ToggleNodeFoldedCommand.
- * 
+ *
  * @constructor
  * @augments mindmaps.Command
  */
@@ -166,7 +166,7 @@ mindmaps.ToggleNodeFoldedCommand.prototype = new mindmaps.Command();
 
 /**
  * Creates a new UndoCommand.
- * 
+ *
  * @constructor
  * @augments mindmaps.Command
  */
@@ -181,7 +181,7 @@ mindmaps.UndoCommand.prototype = new mindmaps.Command();
 
 /**
  * Creates a new RedoCommand.
- * 
+ *
  * @constructor
  * @augments mindmaps.Command
  */
@@ -200,7 +200,7 @@ mindmaps.RedoCommand.prototype = new mindmaps.Command();
 
 /**
  * Creates a new CopyNodeCommand.
- * 
+ *
  * @constructor
  * @augments mindmaps.Command
  */
@@ -215,7 +215,7 @@ mindmaps.CopyNodeCommand.prototype = new mindmaps.Command();
 
 /**
  * Creates a new CutNodeCommand.
- * 
+ *
  * @constructor
  * @augments mindmaps.Command
  */
@@ -230,7 +230,7 @@ mindmaps.CutNodeCommand.prototype = new mindmaps.Command();
 
 /**
  * Creates a new PasteNodeCommand.
- * 
+ *
  * @constructor
  * @augments mindmaps.Command
  */
@@ -249,7 +249,7 @@ mindmaps.PasteNodeCommand.prototype = new mindmaps.Command();
 
 /**
  * Creates a new NewDocumentCommand.
- * 
+ *
  * @constructor
  * @augments mindmaps.Command
  */
@@ -263,7 +263,7 @@ mindmaps.NewDocumentCommand.prototype = new mindmaps.Command();
 
 /**
  * Creates a new OpenDocumentCommand.
- * 
+ *
  * @constructor
  * @augments mindmaps.Command
  */
@@ -278,22 +278,37 @@ mindmaps.OpenDocumentCommand.prototype = new mindmaps.Command();
 
 /**
  * Creates a new SaveDocumentCommand.
- * 
+ *
  * @constructor
  * @augments mindmaps.Command
  */
 mindmaps.SaveDocumentCommand = function() {
 	this.id = "SAVE_DOCUMENT_COMMAND";
-	this.label = "Save...";
-	this.shortcut = "ctrl+s";
+	this.label = "Local Storage...";
 	this.icon = "ui-icon-disk";
-	this.description = "Save the mind map";
+	this.description = "Save the mind map in the local storage";
 };
 mindmaps.SaveDocumentCommand.prototype = new mindmaps.Command();
 
 /**
+ * Creates a new ExportCommand.
+ * post to target in api version
+ *
+ * @constructor
+ * @augments mindmaps.Command
+ */
+mindmaps.ExportCommand = function() {
+	this.id = "EXPORT_COMMAND";
+	this.icon = "ui-icon-disk";
+	this.label = "Save...";
+	this.shortcut = "ctrl+s";
+	this.description = "Save the mind map";
+};
+mindmaps.ExportCommand.prototype = new mindmaps.Command();
+
+/**
  * Creates a new CloseDocumentCommand.
- * 
+ *
  * @constructor
  * @augments mindmaps.Command
  */
@@ -307,7 +322,7 @@ mindmaps.CloseDocumentCommand.prototype = new mindmaps.Command();
 
 /**
  * Creates a new HelpCommand.
- * 
+ *
  * @constructor
  * @augments mindmaps.Command
  */
@@ -323,7 +338,7 @@ mindmaps.HelpCommand.prototype = new mindmaps.Command();
 
 /**
  * Creates a new PrintCommand.
- * 
+ *
  * @constructor
  * @augments mindmaps.Command
  */
@@ -335,17 +350,3 @@ mindmaps.PrintCommand = function() {
 	this.description = "Print the mind map";
 };
 mindmaps.PrintCommand.prototype = new mindmaps.Command();
-
-/**
- * Creates a new ExportCommand.
- * 
- * @constructor
- * @augments mindmaps.Command
- */
-mindmaps.ExportCommand = function() {
-	this.id = "EXPORT_COMMAND";
-	this.icon = "ui-icon-image";
-	this.label = "Export As Image...";
-	this.description = "Export the mind map";
-};
-mindmaps.ExportCommand.prototype = new mindmaps.Command();

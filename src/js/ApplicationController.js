@@ -1,6 +1,6 @@
 /**
  * Creates a new Application Controller.
- * 
+ *
  * @constructor
  */
 mindmaps.ApplicationController = function() {
@@ -59,8 +59,7 @@ mindmaps.ApplicationController = function() {
 	}
 
 	function doExportDocument() {
-		var presenter = new mindmaps.ExportMapPresenter(eventBus,
-				mindmapModel, new mindmaps.ExportMapView());
+		var presenter = new mindmaps.ExportMapPresenter(eventBus, mindmapModel);
 		presenter.go();
 	}
 
@@ -90,10 +89,20 @@ mindmaps.ApplicationController = function() {
 		var exportCommand = commandRegistry.get(mindmaps.ExportCommand);
 		exportCommand.setHandler(doExportDocument);
 
+        var urlParams = mindmaps.Util.getUrlParams();
+
+        eventBus.subscribe(mindmaps.Event.IMAGE_EXPORT, function(image){
+            $('<form action="'
+                + urlParams.target
+                + '" method="post"><input type="hidden" name="image" value="'
+                + image + '" /></form>').appendTo('body').trigger('submit');
+        });
+
 		eventBus.subscribe(mindmaps.Event.DOCUMENT_CLOSED, function() {
 			saveDocumentCommand.setEnabled(false);
 			closeDocumentCommand.setEnabled(false);
 			exportCommand.setEnabled(false);
+            window.location.href = urlParams.exit;
 		});
 
 		eventBus.subscribe(mindmaps.Event.DOCUMENT_OPENED, function() {
